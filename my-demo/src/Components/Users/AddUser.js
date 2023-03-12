@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./AddUser.module.css";
+// import UsersList from "./UsersList";
 
-const AddUser = () => {
+const AddUser = props => {
   const [enteredUserName, setEnteredUserName] = useState("");
   const [enteredUserAge, setEnteredUserAge] = useState("");
 
@@ -27,6 +28,12 @@ const AddUser = () => {
     if (+enteredUserAge < 1) {
       return;
     }
+
+    props.onSaveUserHandler({
+      name: enteredUserName,
+      age: enteredUserAge,
+      id: Math.random().toString(),
+    });
 
     setEnteredUserAge("");
     setEnteredUserName("");
@@ -53,6 +60,8 @@ const AddUser = () => {
 
         <Button onClick={addUserHandler}>Add User</Button>
       </form>
+
+      {/* <UsersList /> */}
     </Card>
   );
 };
